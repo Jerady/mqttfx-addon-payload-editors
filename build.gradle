@@ -1,0 +1,86 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'signing'
+}
+
+apply from: 'deploy.gradle'
+
+group artifactGroupId
+version artifactVersion
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    jcenter()
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier "sources"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'MQTT.fx Payload Editors Addon Base'
+                description = 'The base library for implementing custom MQTT.fx Payload Editors as an addion'
+                url = 'https://www.softblade.de'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'jerady'
+                        name = 'Jens Deters'
+                        email = 'jens.deters@softblade.de'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://example.com/my-library.git'
+                    developerConnection = 'scm:git:ssh://example.com/my-library.git'
+                    url = 'https://www.softblade.de/'
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets.main.resources { srcDirs += ["src/main/java"]; include "**/*.*" }
+sourceSets.test.resources { srcDirs += ["src/test/java"]; include "**/*.*" }

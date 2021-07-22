@@ -1,0 +1,7 @@
+ext{
+    artifactGroupId = 'de.softblade'
+    artifactId = 'mqttfx-addon-payload-editors'
+    artifactVersion = '1.0.0'
+    artifactPublications = ['mavenJava']
+    artifactDesc = '$artifactId $artifactVersion'
+}
