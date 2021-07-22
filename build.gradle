@@ -38,7 +38,7 @@ publishing {
             }
             pom {
                 name = 'MQTT.fx Payload Editors Addon Base'
-                description = 'The base library for implementing custom MQTT.fx Payload Editors as an addion'
+                description = 'The base library for implementing custom MQTT.fx Payload Editors as an addon'
                 url = 'https://www.softblade.de'
                 licenses {
                     license {
