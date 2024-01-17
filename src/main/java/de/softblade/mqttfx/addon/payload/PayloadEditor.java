@@ -43,4 +43,11 @@ public interface PayloadEditor {
    * @return The presentation name of the editor (e.g. in Drop-Downs)
    */
   String getName();
+
+  /**
+   *
+   * @return The desired position/index of the editor in the dropdown menu.
+   */
+  int getPosition();
+
 }
