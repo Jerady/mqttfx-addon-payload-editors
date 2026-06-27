@@ -22,13 +22,21 @@ hands the user's input back as a payload.
 
 ## Installation
 
-Add the dependency to your addon project.
+This library is **not published to Maven Central**. Build it from source and install it into
+your local Maven cache, then depend on it from your addon project:
+
+```bash
+git clone git@github.com:Jerady/mqttfx-addon-payload-editors.git
+cd mqttfx-addon-payload-editors
+./gradlew publishToMavenLocal
+```
+
+Then declare the dependency.
 
 **Gradle**
 
 ```groovy
 repositories {
-    mavenCentral()
     mavenLocal()
 }
 
@@ -46,13 +54,6 @@ dependencies {
     <version>1.0.0</version>
 </dependency>
 ```
-
-> Not on a public repository yet? Build this library locally and install it into your local
-> Maven cache, then depend on it as above:
->
-> ```bash
-> ./gradlew publishToMavenLocal
-> ```
 
 ## Concepts
 
